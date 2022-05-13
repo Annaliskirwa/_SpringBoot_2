@@ -11,4 +11,15 @@ public class phoneNumber {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String phoneNumber;
+
+    public phoneNumber(){
+
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }
