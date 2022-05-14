@@ -22,5 +22,10 @@ public class PhoneController {
     public Optional<PhoneNumber> getPhoneNumberById(@PathVariable(value = "id") Long phoneId){
         return phoneNumberRepository.findById(phoneId);
     }
+    @DeleteMapping("/phonenumber/{{id}}")
+    public String deletePhoneNumber(@PathVariable(value = "id") Long phoneId){
+        phoneNumberRepository.deleteById(phoneId);
+        return "The phone number has been deleted";
+    }
 
 }
