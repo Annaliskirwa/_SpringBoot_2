@@ -27,5 +27,9 @@ public class PhoneController {
         phoneNumberRepository.deleteById(phoneId);
         return "The phone number has been deleted";
     }
+    @PostMapping("/phonenumber")
+    public PhoneNumber createPhoneNumber(@Valid @RequestBody PhoneNumber phoneNumber ){
+        return phoneNumberRepository.save(phoneNumber);
+    }
 
 }
