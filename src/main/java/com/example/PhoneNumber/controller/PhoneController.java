@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -33,11 +34,13 @@ public class PhoneController {
         return phoneNumberRepository.save(phoneNumber);
     }
     @PutMapping("/phonenumber/{id}")
-    public PhoneNumber updatePhoneNumber(@Valid @RequestBody PhoneNumber phoneNumber, @PathVariable(value = "id") Long phoneId){
-        phoneNumberRepository.findById(phoneId);
-                phoneNumber.setPhoneNumber(phoneNumber.getPhoneNumber());
-        final PhoneNumber updatedPhoneNumber = phoneNumberRepository.save(phoneNumber);
-        return updatedPhoneNumber;
+    public PhoneNumber updatePhoneNumber(PhoneNumber phoneNumber, Long phoneId){
+        PhoneNumber phoneNumber1 = (PhoneNumber) phoneNumberRepository.findById(phoneId).get();
+        if (Objects.nonNull(phoneNumber.getPhoneNumber())
+        && !"".equalsIgnoreCase(phoneNumber.getPhoneNumber())){
+            phoneNumber1.setPhoneNumber(phoneNumber.getPhoneNumber());
+        }
+        return (PhoneNumber) phoneNumberRepository.save(phoneNumber1);
     }
 
 }
