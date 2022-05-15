@@ -34,7 +34,7 @@ public class PhoneController {
         return phoneNumberRepository.save(phoneNumber);
     }
     @PutMapping("/phonenumber/{id}")
-    public PhoneNumber updatePhoneNumber(PhoneNumber phoneNumber, Long phoneId){
+    public PhoneNumber updatePhoneNumber(@Valid @RequestBody PhoneNumber phoneNumber,@PathVariable(value = "id") Long phoneId){
         PhoneNumber phoneNumber1 = (PhoneNumber) phoneNumberRepository.findById(phoneId).get();
         if (Objects.nonNull(phoneNumber.getPhoneNumber())
         && !"".equalsIgnoreCase(phoneNumber.getPhoneNumber())){
