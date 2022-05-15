@@ -4,6 +4,7 @@ import com.example.PhoneNumber.model.PhoneNumber;
 import com.example.PhoneNumber.repository.PhoneNumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +19,11 @@ public class PhoneController {
     public List<PhoneNumber> getPhoneNumber(){
         return phoneNumberRepository.findAll();
     }
-    @GetMapping("/phonenumber/{{id}}")
+    @GetMapping("/phonenumber/{id}")
     public Optional<PhoneNumber> getPhoneNumberById(@PathVariable(value = "id") Long phoneId){
         return phoneNumberRepository.findById(phoneId);
     }
-    @DeleteMapping("/phonenumber/{{id}}")
+    @DeleteMapping("/phonenumber/{id}")
     public String deletePhoneNumber(@PathVariable(value = "id") Long phoneId){
         phoneNumberRepository.deleteById(phoneId);
         return "The phone number has been deleted";
@@ -30,6 +31,13 @@ public class PhoneController {
     @PostMapping("/phonenumber")
     public PhoneNumber createPhoneNumber(@Valid @RequestBody PhoneNumber phoneNumber ){
         return phoneNumberRepository.save(phoneNumber);
+    }
+    @PutMapping("/phonenumber/{id}")
+    public PhoneNumber updatePhoneNumber(@Valid @RequestBody PhoneNumber phoneNumber, @PathVariable(value = "id") Long phoneId){
+        phoneNumberRepository.findById(phoneId);
+                phoneNumber.setPhoneNumber(phoneNumber.getPhoneNumber());
+        final PhoneNumber updatedPhoneNumber = phoneNumberRepository.save(phoneNumber);
+        return updatedPhoneNumber;
     }
 
 }
