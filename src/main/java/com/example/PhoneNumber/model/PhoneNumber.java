@@ -37,6 +37,25 @@ public class PhoneNumber {
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = sanitizePhoneNumber(phoneNumber);
+    }
+
+    public String sanitizePhoneNumber(String phoneNumber){
+        if (phoneNumber.equals("")){
+            return "";
+        }
+        if (phoneNumber.length() < 11 & phoneNumber.startsWith("0")){
+            String p = phoneNumber.replaceFirst("^0","+254-");
+            return p;
+        }
+        if (phoneNumber.length() == 13 && phoneNumber.startsWith("+254")){
+            String p = phoneNumber.replaceFirst("^+254","+254-");
+            return p;
+        }
+        if (phoneNumber.length() == 12 && phoneNumber.startsWith("254")){
+            String p = phoneNumber.replaceFirst("^254", "+254-");
+            return p;
+        }
+        return phoneNumber;
     }
 }
