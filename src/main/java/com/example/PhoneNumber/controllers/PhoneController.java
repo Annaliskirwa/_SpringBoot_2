@@ -1,4 +1,4 @@
-package com.example.PhoneNumber.controller;
+package com.example.PhoneNumber.controllers;
 
 import com.example.PhoneNumber.model.PhoneNumber;
 import com.example.PhoneNumber.repository.PhoneNumberRepository;
@@ -43,4 +43,12 @@ public class PhoneController {
         return (PhoneNumber) phoneNumberRepository.save(phoneNumber1);
     }
 
+    public String sanitizePhoneNumber(String phoneNumber){
+        if (phoneNumber.equals("")){
+            return "";
+        }
+    }
 }
+
+
+
