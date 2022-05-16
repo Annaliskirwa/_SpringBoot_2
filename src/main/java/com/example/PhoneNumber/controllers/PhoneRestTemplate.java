@@ -43,4 +43,12 @@ public class PhoneRestTemplate {
         return restTemplate.exchange(" http://localhost:8080/phonenumber/v1/phonenumber/"+id, HttpMethod.PUT, entity, String.class).getBody();
 
     }
+    @RequestMapping(value = "template/phonenumber/{id}")
+    public String deletePhoneNumbers(@PathVariable(value = "id") String id){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<PhoneNumber> entity = new HttpEntity<PhoneNumber>(headers);
+
+        return restTemplate.exchange("http://localhost:8080/phonenumber/v1/phonenumber/"+id, HttpMethod.DELETE, entity, String.class).getBody();
+    }
 }
