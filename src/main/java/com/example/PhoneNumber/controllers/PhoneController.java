@@ -51,6 +51,15 @@ public class PhoneController {
             String p = phoneNumber.replaceFirst("^0","+254-");
             return p;
         }
+        if (phoneNumber.length() == 13 && phoneNumber.startsWith("+254")){
+            String p = phoneNumber.replaceFirst("^+254","+254-");
+            return p;
+        }
+        if (phoneNumber.length() == 12 && phoneNumber.startsWith("254")){
+            String p = phoneNumber.replaceFirst("^254", "+254-");
+            return p;
+        }
+        return phoneNumber;
     }
 }
 
