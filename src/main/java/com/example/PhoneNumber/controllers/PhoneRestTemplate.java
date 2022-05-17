@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 
 @RestController
@@ -35,12 +36,12 @@ public class PhoneRestTemplate {
     }
 
     @RequestMapping(value = "template/phonenumber/{id}", method = RequestMethod.PUT)
-    public String updatePhoneNumbers(@PathVariable(value = "id") String id, @RequestBody PhoneNumber phoneNumber){
+    public String updatePhoneNumbers(@PathVariable(value = "id") String id, @RequestBody @Valid PhoneNumber phoneNumber){
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<PhoneNumber> entity = new HttpEntity<PhoneNumber>(phoneNumber, headers);
 
-        return restTemplate.exchange(" http://localhost:8080/phonenumber/v1/phonenumber/"+id, HttpMethod.PUT, entity, String.class).getBody();
+        return restTemplate.exchange("http://localhost:8080/phonenumber/v1/phonenumber/"+id, HttpMethod.PUT, entity, String.class).getBody();
 
     }
     @RequestMapping(value = "template/phonenumber/{id}")
