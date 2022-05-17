@@ -45,16 +45,21 @@ public class PhoneNumber {
         if (phoneNumber.equals("")){
             return "";
         }
-        if (phoneNumber.length() < 11 & phoneNumber.startsWith("0")){
+        if (phoneNumber.length() == 9 & phoneNumber.startsWith("7")){
+            String p = "+254-" + phoneNumber;
+            return p;
+        }
+        if (phoneNumber.length() == 10 & phoneNumber.startsWith("0")){
             String p = phoneNumber.replaceFirst("^0","+254-");
+            return p;
+        }
+
+        if (phoneNumber.length() == 12 && phoneNumber.startsWith("254")){
+            String p = phoneNumber.replaceFirst("^254", "+254-");
             return p;
         }
         if (phoneNumber.length() == 13 && phoneNumber.startsWith("+254")){
             String p = phoneNumber.replaceFirst("^+254","+254-");
-            return p;
-        }
-        if (phoneNumber.length() == 12 && phoneNumber.startsWith("254")){
-            String p = phoneNumber.replaceFirst("^254", "+254-");
             return p;
         }
         return phoneNumber;
