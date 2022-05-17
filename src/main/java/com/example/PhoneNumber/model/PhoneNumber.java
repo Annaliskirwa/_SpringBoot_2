@@ -41,6 +41,7 @@ public class PhoneNumber {
     }
 
     public String sanitizePhoneNumber(String phoneNumber){
+        phoneNumber = phoneNumber.replaceAll("\\D+","");
         if (phoneNumber.equals("")){
             return "";
         }
