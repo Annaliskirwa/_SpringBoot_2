@@ -41,7 +41,11 @@ public class PhoneNumber {
     }
 
     public String sanitizePhoneNumber(String phoneNumber){
-        phoneNumber = phoneNumber.replaceAll("\\D+","");
+        if (phoneNumber.matches("[0-9]+")){
+            return phoneNumber;
+        }else{
+            phoneNumber = phoneNumber.replaceAll("\\D+","");
+        }
         if (phoneNumber.equals("")){
             return "";
         }
