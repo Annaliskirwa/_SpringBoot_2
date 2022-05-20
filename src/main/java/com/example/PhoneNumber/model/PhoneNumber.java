@@ -66,6 +66,10 @@ public class PhoneNumber {
             String p = phoneNumber.replaceFirst("^+254","+254-");
             return p;
         }
+        if (phoneNumber.length() == 11){
+            String p = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "+($1) $2-$3");
+            return p;
+        }
         return phoneNumber;
     }
 }
