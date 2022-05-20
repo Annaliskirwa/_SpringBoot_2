@@ -42,7 +42,7 @@ public class PhoneNumber {
 
     public String sanitizePhoneNumber(String phoneNumber){
         if (phoneNumber.matches("[0-9]+")){
-            return phoneNumber;
+            phoneNumber = phoneNumber;
         }else{
             phoneNumber = phoneNumber.replaceAll("\\D+","");
         }
@@ -66,7 +66,7 @@ public class PhoneNumber {
             String p = phoneNumber.replaceFirst("^+254","+254-");
             return p;
         }
-        if (phoneNumber.length() == 11){
+        if (phoneNumber.length() <= 15){
             String p = phoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "+($1) $2-$3");
             return p;
         }
